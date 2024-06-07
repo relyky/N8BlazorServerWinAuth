@@ -36,7 +36,7 @@
 <h2>AuthenticationState</h2>
 @if (authState?.User.Identity?.IsAuthenticated ?? false)
 {
-  <h3 style="color:green;">The user [@(authState.User.Identity.Name)] is Authorized.</h3>
+  <h3 style="color:green;">The user [@(authState.User.Identity.Name)] is Authorized, identities count: @(authState.User.Identities.Count())</h3>
 
   <h4>claims</h4>
   <ol>
