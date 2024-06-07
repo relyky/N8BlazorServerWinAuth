@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N8BlazorServerWinAuth", "N8BlazorServerWinAuth.csproj", "{F378C7E5-81FD-409F-8203-F7EE3239097C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F378C7E5-81FD-409F-8203-F7EE3239097C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F378C7E5-81FD-409F-8203-F7EE3239097C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F378C7E5-81FD-409F-8203-F7EE3239097C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F378C7E5-81FD-409F-8203-F7EE3239097C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {955A3F22-8A8B-4FE3-8480-E223D4A3F09D}
+	EndGlobalSection
+EndGlobal
