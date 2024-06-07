@@ -1,2 +1,2 @@
 # N8BlazorServerWinAuth
- 測試 windows 認證
+ [NET8 Blazor App 設定 Windows 驗證](https://rely-ky.gitbook.io/net8/net8-blazor-app-she-ding-windows-yan-zheng)
