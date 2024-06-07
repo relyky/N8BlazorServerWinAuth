@@ -4,6 +4,63 @@
 
 <h1>Auth 顯示授權狀態</h1>
 
-@code {
+<div class="alert alert-warning" role="alert">
+  HTTP/2 不支援 Windows 驗證。<br />
+  驗證挑戰可以在 HTTP/2 回應上傳送，但用戶端必須在驗證之前降級為 HTTP/1.1。<br />
+  <a href="https://learn.microsoft.com/zh-tw/aspnet/core/security/authentication/windowsauth?view=aspnetcore-8.0&tabs=visual-studio">參考：在 ASP.NET Core 中設定 Windows 驗證</a>
+</div>
 
+<h2>HttpContext</h2>
+<pre>
+  @(new
+  {
+    HttpContext = HttpContext is null ? "nil" : "Here I am",
+    idName = HttpContext?.User.Identity?.Name,
+    isAuth = HttpContext?.User.Identity?.IsAuthenticated
+  })
+</pre>
+
+<h2>AuthorizeView</h2>
+<AuthorizeView Context="auth">
+  <Authorized>
+    <h3 style="color:green;">The user [@(auth.User.Identity?.Name)] is Authorized.</h3>
+  </Authorized>
+  <Authorizing>
+    <h3 style="color:grey">Authorizing...</h3>
+  </Authorizing>
+  <NotAuthorized>
+    <h3 style="color:coral">Not Authorized</h3>
+  </NotAuthorized>
+</AuthorizeView>
+
+<h2>AuthenticationState</h2>
+@if (authState?.User.Identity?.IsAuthenticated ?? false)
+{
+  <h3 style="color:green;">The user [@(authState.User.Identity.Name)] is Authorized.</h3>
+
+  <h4>claims</h4>
+  <ol>
+    @foreach (var claim in authState?.User.Claims ?? [])
+    {
+      <li>
+        <span style="font-weight:600;">@claim.Type ：</span><span>@claim.Value</span>
+      </li>
+    }
+  </ol>
+}
+else
+{
+  <h3 style="color:coral">Not Authorized</h3>
+}
+
+@code {
+  [CascadingParameter] HttpContext? HttpContext { get; set; }
+  [CascadingParameter] Task<AuthenticationState> AuthStateTask { get; set; } = default!;
+
+  AuthenticationState? authState;
+
+  protected override async Task OnInitializedAsync()
+  {
+    authState = await AuthStateTask; // 現在登入狀態
+  }
 }

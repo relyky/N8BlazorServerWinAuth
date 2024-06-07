@@ -1,5 +1,6 @@
 ﻿@page "/counter"
 @rendermode InteractiveServer
+@attribute [Authorize]
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,11 +11,37 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code {
-    private int currentCount = 0;
+@* 檢視授權資料  *@
+<hr />
+<h2>HttpContext</h2>
+<pre>
+  @(new
+  {
+    HttpContext = HttpContext is null ? "nil" : "Here I am",
+    idName = HttpContext?.User.Identity?.Name,
+    isAuth = HttpContext?.User.Identity?.IsAuthenticated
+  })
+</pre>
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
+<h2>AuthorizeView</h2>
+<AuthorizeView Context="auth">
+  <Authorized>
+    <h3 style="color:green;">The user [@(auth.User.Identity?.Name)] is Authorized.</h3>
+  </Authorized>
+  <Authorizing>
+    <h3 style="color:grey">Authorizing...</h3>
+  </Authorizing>
+  <NotAuthorized>
+    <h3 style="color:coral">Not Authorized</h3>
+  </NotAuthorized>
+</AuthorizeView>
+
+@code {
+  [CascadingParameter] HttpContext? HttpContext { get; set; }
+
+  private int currentCount = 0;
+  private void IncrementCount()
+  {
+    currentCount++;
+  }
 }

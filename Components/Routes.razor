@@ -1,6 +1,14 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
-    </Found>
+﻿<Router AppAssembly=@typeof(Program).Assembly>
+  <Found Context="routeData">
+    @* ※ AuthorizeRouteView.Resource 預設為 DefaultHttpContext 改指定 RouteData 以取得 pageType。
+       ref→[資源授權](https://learn.microsoft.com/zh-tw/aspnet/core/blazor/security/?view=aspnetcore-8.0#resource-authorization) 
+    *@
+    <AuthorizeRouteView RouteData=@routeData Resource=@routeData DefaultLayout=@typeof(Layout.MainLayout)>
+      <NotAuthorized>
+        <h1>401 NotAuthorized</h1>
+        @* <RedirectToLogin /> *@        
+      </NotAuthorized>
+    </AuthorizeRouteView>
+    <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+  </Found>
 </Router>
